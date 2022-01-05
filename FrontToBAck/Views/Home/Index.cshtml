@@ -1,4 +1,4 @@
-﻿
+﻿@model HomeVm
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,10 +10,10 @@
             <div class="col-lg">
                 <div class="SliderItem position-absolute">
                     <h3>
-                        Send <span>flowers</span> like you mean it
+                        @Html.Raw(Model.SliderDesc.Title)
                     </h3>
-                    <p>Where flowers are our inspiration to create lasting memories. Whatever the occasion, our flowers will make it special cursus a sit amet mauris.</p>
-                    <img src="./img/h2-sign-img.png" alt="">
+                    <p>@Model.SliderDesc.Desc</p>
+                    <img src="~/img/@Model.SliderDesc.ImageUrl" alt="">
                 </div>
                 <div class="Slider">
                 </div>
@@ -438,3 +438,4 @@
     </div>
 </section>
 <!-- SLIDER_2 END -->
+

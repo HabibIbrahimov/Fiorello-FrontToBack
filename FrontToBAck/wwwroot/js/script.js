@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
 //NAVBAR
 $(document).on('click', '#search', function () {
