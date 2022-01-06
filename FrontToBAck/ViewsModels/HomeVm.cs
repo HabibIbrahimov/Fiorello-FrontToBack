@@ -13,5 +13,6 @@ namespace FrontToBAck.ViewsModels
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public About About { get; set; }
+        public IEnumerable<Expert> Experts { get; set; }
     }
 }
