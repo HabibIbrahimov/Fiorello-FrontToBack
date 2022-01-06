@@ -23,11 +23,13 @@ namespace FrontToBAck.Controllers
             SliderDesc sliderDesc = _context.SliderDescs.FirstOrDefault();
             List<Category> categories = _context.Categories.ToList();
             List<Product> products = _context.Products.Include(x=>x.Category).ToList();
+            About about = _context.Abouts.FirstOrDefault();
             HomeVm homeVm = new HomeVm();
             homeVm.Sliders = sliders;
             homeVm.SliderDesc = sliderDesc;
             homeVm.Categories = categories;
             homeVm.Products = products;
+            homeVm.About = about;
             return View(homeVm);
         }
     }

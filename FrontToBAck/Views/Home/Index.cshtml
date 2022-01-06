@@ -93,18 +93,17 @@
         <div class="row py-5">
             <div class="col-lg-6">
                 <div class="img">
-                    <img src="img/h3-video-img.jpg" class="img-fluid" alt="">
+                    <a href="@Model.About.VideoUrl"><img src="~/img/@Model.About.ImageUrl" class="img-fluid" alt=""></a>
                     <div class="player position-absolute rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="fas fa-play fa-lg" onclick="location.href='//www.youtube.com/watch?v=NPRaMN3Gbyo'" style="color:#f34f3f;"></i>
+                        <i class="fas fa-play fa-lg" style="color:#f34f3f;"></i>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="about-text mt-5 mt-lg-0 px-lg-5">
-                    <h2>Suprise Your <span style="color: #f34f3f;">Valentine!</style></span> Let us arrange a smile.</h2>
+                    @Html.Raw(Model.About.Title)
                     <p class="py-3">
-                        Where flowers are our inspiration to create lasting memories. Whatever the
-                        occasion...
+                       @Model.About.Description
                     </p>
                     <ul class="list-unstyled">
                         <li class="mt-3">

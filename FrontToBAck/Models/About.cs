@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FrontToBAck.Models
 {
-    public class Slider
+    public class About
     {
         public int Id { get; set; }
-        [Required,StringLength(260),MinLength(5)]
         public string ImageUrl { get; set; }
+        public string Title { get; set; }
+        public string VideoUrl { get; set; }
+        public string Description { get; set; }
     }
 }
