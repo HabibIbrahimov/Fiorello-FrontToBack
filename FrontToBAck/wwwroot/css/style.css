@@ -399,8 +399,8 @@ header nav {
 
 
   #subscribe {
-    background: url(../img/h3-background-img.jpg);
-    background-attachment: fixed;
+    /*background: url(../img/h3-background-img.jpg);*/
+    /*background-attachment: fixed;*/
   }
   
   #subscribe .content h3 {

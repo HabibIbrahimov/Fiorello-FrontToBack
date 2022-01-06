@@ -14,5 +14,6 @@ namespace FrontToBAck.ViewsModels
         public IEnumerable<Product> Products { get; set; }
         public About About { get; set; }
         public IEnumerable<Expert> Experts { get; set; }
+        public Subscribe Subscribe { get; set; }
     }
 }

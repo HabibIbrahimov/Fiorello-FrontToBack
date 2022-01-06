@@ -25,6 +25,7 @@ namespace FrontToBAck.Controllers
             List<Product> products = _context.Products.Include(x=>x.Category).ToList();
             About about = _context.Abouts.FirstOrDefault();
             List<Expert>experts = _context.Experts.ToList();
+            Subscribe subscribe = _context.Subscribes.FirstOrDefault();
             HomeVm homeVm = new HomeVm();
             homeVm.Sliders = sliders;
             homeVm.SliderDesc = sliderDesc;
@@ -32,6 +33,7 @@ namespace FrontToBAck.Controllers
             homeVm.Products = products;
             homeVm.About = about;
             homeVm.Experts = experts;
+            homeVm.Subscribe = subscribe;
             return View(homeVm);
         }
     }
