@@ -27,6 +27,7 @@ namespace FrontToBAck.Controllers
             List<Expert>experts = _context.Experts.ToList();
             Subscribe subscribe = _context.Subscribes.FirstOrDefault();
             List<Blog> blogs = _context.Blog.ToList();
+            List<BlogSlider> blogsliders = _context.BlogSliders.ToList();
             HomeVm homeVm = new HomeVm();
             homeVm.Sliders = sliders;
             homeVm.SliderDesc = sliderDesc;
@@ -36,6 +37,8 @@ namespace FrontToBAck.Controllers
             homeVm.Experts = experts;
             homeVm.Subscribe = subscribe;
             homeVm.Blogs = blogs;
+            homeVm.BlogSliders = blogsliders;
+
             return View(homeVm);
         }
     }

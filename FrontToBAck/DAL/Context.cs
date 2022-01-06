@@ -21,6 +21,7 @@ namespace FrontToBAck.DAL
         public DbSet<Expert> Experts { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<Blog> Blog { get; set; }
+        public DbSet<BlogSlider> BlogSliders { get; set; }
 
     }
 }
