@@ -1,5 +1,6 @@
 ﻿using FrontToBAck.DAL;
 using FrontToBAck.Models;
+using FrontToBAck.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,8 +19,26 @@ namespace FrontToBAck.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> products = _context.Products.Include(p=>p.Category).ToList();
+            ViewBag.Product = _context.Products.Count();
+            List<Product> products = _context.Products.Include(p=>p.Category).Take(8).ToList();
             return View(products);
         }
+
+        public IActionResult LoadMore(int skip)
+        {
+            return Json(_context.Products.Skip(skip).Take(8).ToList());
+        }
+        //public IActionResult LoadMore()
+        //{
+        //    return Json(_context.Products.Select(p=>new ProductReturn {
+        //    Id=p.Id,
+        //    Name=p.Name,
+        //    Price=p.Price,
+        //    ImageUrl=p.ImageUrl,
+        //    Category=p.Category.Name
+            
+        //    }).Take(8).ToList());
+
+        //}
     }
 }
