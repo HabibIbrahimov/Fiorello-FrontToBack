@@ -1,4 +1,10 @@
 $(document).ready(function () {
+//LoadMore
+
+    $(document).on("click", "#loadMore", function () {
+
+
+    });
 
 //NAVBAR
 $(document).on('click', '#search', function () {

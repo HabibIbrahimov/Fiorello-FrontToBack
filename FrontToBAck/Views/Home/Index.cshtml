@@ -83,6 +83,10 @@
             }
 
         </div>
+
+        <div class="row justify-content-center mt-3">
+            <button id="loadMore" class="btn btn-success">Load more..</button>
+        </div>
     </div>
 </section>
 
@@ -103,7 +107,7 @@
                 <div class="about-text mt-5 mt-lg-0 px-lg-5">
                     @Html.Raw(Model.About.Title)
                     <p class="py-3">
-                       @Model.About.Description
+                        @Model.About.Description
                     </p>
                     <ul class="list-unstyled">
                         <li class="mt-3">
@@ -210,7 +214,7 @@
                         <div class="text mt-3 text-center px-5">
                             <h5>@item.Title</h5>
                             <p class="text-black-50">
-                               @item.Text
+                                @item.Text
                             </p>
                         </div>
                     </div>
