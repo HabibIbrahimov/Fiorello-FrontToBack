@@ -22,7 +22,6 @@ namespace FrontToBAck.Controllers
             List<Slider> sliders = _context.Sliders.ToList();
             SliderDesc sliderDesc = _context.SliderDescs.FirstOrDefault();
             List<Category> categories = _context.Categories.ToList();
-            List<Product> products = _context.Products.Include(x=>x.Category).ToList();
             About about = _context.Abouts.FirstOrDefault();
             List<Expert>experts = _context.Experts.ToList();
             Subscribe subscribe = _context.Subscribes.FirstOrDefault();
@@ -32,7 +31,6 @@ namespace FrontToBAck.Controllers
             homeVm.Sliders = sliders;
             homeVm.SliderDesc = sliderDesc;
             homeVm.Categories = categories;
-            homeVm.Products = products;
             homeVm.About = about;
             homeVm.Experts = experts;
             homeVm.Subscribe = subscribe;
