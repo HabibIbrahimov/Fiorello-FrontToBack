@@ -29,9 +29,30 @@ namespace FrontToBAck.Controllers
             IEnumerable<Product> products = _context.Products.Include(c=>c.Category).Skip(skip).Take(8).ToList();
             return PartialView("_ProductPartial",products);
         }
+
+
+
+        public IActionResult Search(string search)
+        {
+            IEnumerable<Product> products = _context.Products
+                .Include(c => c.Category)
+                .Where(p => p.Name.ToLower().Contains(search.ToLower()))
+                .OrderByDescending(p => p.Id)
+                .Take(10)
+                .ToList();
+            return PartialView("_Searchpartial", products);
+        }
+        public IActionResult Detail(int id)
+        {
+            Product product = _context.Products
+                .Include(c => c.Category)
+                .FirstOrDefault(p => p.Id == id);
+            return View(product);
+                
+        }
         //public IActionResult LoadMore()
         //{
-            
+
         //    //return Json(_context.Products.Select(p => new ProductReturn
         //    //{
         //    //    Id = p.Id,

@@ -1,4 +1,22 @@
 $(document).ready(function () {
+    //search
+    $(document).on("keyup", "#input-search", function () {
+        let search = $("#input-search").val().trim();
+        $("#search-list").slice(1).remove();
+        if (search.length > 0) {
+            $.ajax({
+                url: "/product/search ? search=" + search,
+                type: "get",
+                success: function (res) {
+                    $("#search-list").append(res);
+                }
+            })
+        }
+    })
+
+
+
+
     //load more
     let count = $("#count").val();
     let skip = 8;
