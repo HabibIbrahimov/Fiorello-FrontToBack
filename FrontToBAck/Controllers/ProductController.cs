@@ -26,18 +26,21 @@ namespace FrontToBAck.Controllers
 
         public IActionResult LoadMore(int skip)
         {
-            return Json(_context.Products.Skip(skip).Take(8).ToList());
+            IEnumerable<Product> products = _context.Products.Include(c=>c.Category).Skip(skip).Take(8).ToList();
+            return PartialView("_ProductPartial",products);
         }
         //public IActionResult LoadMore()
         //{
-        //    return Json(_context.Products.Select(p=>new ProductReturn {
-        //    Id=p.Id,
-        //    Name=p.Name,
-        //    Price=p.Price,
-        //    ImageUrl=p.ImageUrl,
-        //    Category=p.Category.Name
             
-        //    }).Take(8).ToList());
+        //    //return Json(_context.Products.Select(p => new ProductReturn
+        //    //{
+        //    //    Id = p.Id,
+        //    //    Name = p.Name,
+        //    //    Price = p.Price,
+        //    //    ImageUrl = p.ImageUrl,
+        //    //    Category = p.Category.Name
+
+        //    //}).Take(8).ToList());
 
         //}
     }

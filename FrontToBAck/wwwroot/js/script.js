@@ -27,7 +27,7 @@ $(document).ready(function () {
                 //    divproduct.append(divimg, divtitle, divprice);
                 //    let divcol = $("<div>").addClass("col-sm-6 col-md-4 col-lg-3 mt-3")
                 //    divcol.append(divproduct);  
-                //    $("#productrow").append(divcol);
+                $("#productrow").append(res);
 
                 //}0
             }
