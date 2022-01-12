@@ -157,3 +157,4 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\_ViewImports.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\_ViewStart.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Dashboard\Index.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Category\Index.cshtml.g.cs
