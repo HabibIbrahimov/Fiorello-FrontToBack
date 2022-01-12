@@ -152,3 +152,4 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Product\D
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Products\Default.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Basket\ShowBasket.cshtml.g.cs
