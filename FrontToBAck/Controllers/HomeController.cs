@@ -1,6 +1,7 @@
 ﻿using FrontToBAck.DAL;
 using FrontToBAck.Models;
 using FrontToBAck.ViewsModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace FrontToBAck.Controllers
         }
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("person", "lorem");
             List<Slider> sliders = _context.Sliders.ToList();
             SliderDesc sliderDesc = _context.SliderDescs.FirstOrDefault();
             List<Category> categories = _context.Categories.ToList();
@@ -38,6 +40,11 @@ namespace FrontToBAck.Controllers
             homeVm.BlogSliders = blogsliders;
 
             return View(homeVm);
+        }
+        public IActionResult GetSession()
+        {
+            string session = HttpContext.Session.GetString("person");
+            return Content(session);
         }
     }
 }
