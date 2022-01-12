@@ -43,9 +43,6 @@ namespace FrontToBAck.Controllers
                 BasketProduct basketProduct = new BasketProduct
                 {
                     Id=product.Id,
-                    Name = product.Name,
-                    Price = product.Price,
-                    ImageUrl = product.ImageUrl,
                     Count = 1
                 };
                 basketProductList.Add(basketProduct);
@@ -64,7 +61,15 @@ namespace FrontToBAck.Controllers
             List<BasketProduct> products = new List<BasketProduct>();
             if (basket != null)
             {
-                products = JsonConvert.DeserializeObject<List<BasketProduct>>(basket);
+               products = JsonConvert.DeserializeObject<List<BasketProduct>>(basket);
+                foreach (var item in products)
+                {
+                  Product product = _context.Products.FirstOrDefault(p => p.Id == item.Id);
+                    item.Price = product.Price;
+                    item.ImageUrl = product.ImageUrl;
+                    item.Name = product.Name;
+                }
+                Response.Cookies.Append("basket", JsonConvert.SerializeObject(products), new Microsoft.AspNetCore.Http.CookieOptions { MaxAge = TimeSpan.FromMinutes(14) });
             }
             return View(products);
         }
