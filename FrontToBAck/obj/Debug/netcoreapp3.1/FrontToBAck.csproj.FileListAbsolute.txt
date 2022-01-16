@@ -160,3 +160,4 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Category\Index.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Category\Detail.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Category\Create.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Category\Update.cshtml.g.cs

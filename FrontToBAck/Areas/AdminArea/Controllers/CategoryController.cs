@@ -38,7 +38,7 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
         public async Task<IActionResult> Create(Category category)
         {
             if (!ModelState.IsValid) return View();
-            bool isExist=_context.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower());
+            bool isExist=_context.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower().Trim());
             if (isExist)
             {
                 ModelState.AddModelError("Name", "Bu adla kateqoriya movcuddur!");
@@ -51,6 +51,29 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             };
 
             await _context.AddAsync(newCategory);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Update(int?id)
+        {
+            if (id == null) return NotFound();
+            Category dbCategory = await _context.Categories.FindAsync(id);
+            if (dbCategory == null) return NotFound();
+            return View(dbCategory);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Category category)
+        {
+            if (!ModelState.IsValid) return View();
+            bool isExist = _context.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower().Trim());
+            Category isExistCategory = _context.Categories.FirstOrDefault(c => c.Id == category.Id);
+            if (isExist&&!(isExistCategory.Name.ToLower()==category.Name.ToLower().Trim()))
+            {
+                ModelState.AddModelError("Name", "Bu adla kateqoriya movcuddur!");
+                return View();
+            };
+            isExistCategory.Name = category.Name;
+            isExistCategory.Description = category.Description;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
