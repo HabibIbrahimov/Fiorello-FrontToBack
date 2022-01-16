@@ -77,5 +77,16 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Remove(int id)
+        {
+            if (id == null) return NotFound();
+            Category dbCategory = await _context.Categories.FindAsync(id);
+            var cat = dbCategory;
+            if (dbCategory == null) return NotFound();
+            _context.Categories.Remove(dbCategory);
+            await  _context.SaveChangesAsync();
+            return View(cat);
+
+        }
     }
 }
