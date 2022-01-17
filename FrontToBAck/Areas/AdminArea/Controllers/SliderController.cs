@@ -1,4 +1,5 @@
 ﻿using FrontToBAck.DAL;
+using FrontToBAck.Extensions;
 using FrontToBAck.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,25 +39,24 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
                 ModelState.AddModelError("Photo", "Don't empty");
             }
 
-            if (!slider.Photo.ContentType.Contains("image/"))
+            if (!slider.Photo.IsImage())
             {
                 ModelState.AddModelError("Photo", "only image");
                 return View();
             }
-            if (slider.Photo.Length / 1024 > 500)
+            if (slider.Photo.IsCorrectSize(500))
             {
-                ModelState.AddModelError("Photo", "300-den yuxari ola bilmez!");
+                ModelState.AddModelError("Photo", "500-den yuxari ola bilmez!");
                 return View();
             }
 
-            string fileName = Guid.NewGuid() + slider.Photo.FileName;
-
-            string path = Path.Combine(_env.WebRootPath, "img", fileName);
-
-            FileStream fileStream = new FileStream(path, FileMode.Create);
-            await slider.Photo.CopyToAsync(fileStream);
+           
             Slider newSlider = new Slider();
+
+            string fileName=await slider.Photo.SaveImageAsync(_env.WebRootPath, "img");
             newSlider.ImageUrl = fileName;
+          
+            
            await _context.Sliders.AddAsync(newSlider);
            await _context.SaveChangesAsync();
 
