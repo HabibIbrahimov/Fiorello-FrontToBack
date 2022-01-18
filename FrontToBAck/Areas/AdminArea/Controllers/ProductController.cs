@@ -70,5 +70,12 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             return View(cat);
 
         }
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null) return NotFound();
+            Product dbProduct = await _context.Products.FindAsync(id);
+            if (dbProduct == null) return NotFound();
+            return View(dbProduct);
+        }
     }
 }

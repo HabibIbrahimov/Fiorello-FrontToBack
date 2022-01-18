@@ -169,3 +169,4 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Product\Index.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Product\Create.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Product\Remove.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Product\Detail.cshtml.g.cs
