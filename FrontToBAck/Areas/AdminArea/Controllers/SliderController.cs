@@ -63,5 +63,75 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Remove(int? id)
+        {
+            if (id == null) return NotFound();
+            Slider dbSlider = await _context.Sliders.FindAsync(id);
+            if (dbSlider == null) return NotFound();
+            return View(dbSlider);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Remove")]
+        public async Task<IActionResult> RemoveSlider(int? id)
+        {
+            if (id == null) return NotFound();
+            Slider dbSlider = await _context.Sliders.FindAsync(id);
+            if (dbSlider == null) return NotFound();
+
+            string path = Path.Combine(_env.WebRootPath,"img", dbSlider.ImageUrl);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+            _context.Sliders.Remove(dbSlider);
+            await _context.SaveChangesAsync();
+           return  RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null) return NotFound();
+            Slider dbSlider = await _context.Sliders.FindAsync(id);
+            if (dbSlider == null) return NotFound();
+            return View(dbSlider);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int?id,Slider slider)
+        {
+            if (id == null) return NotFound();
+            if (slider.Photo != null)
+            {
+                if (ModelState["Photo"].ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
+                {
+                    ModelState.AddModelError("Photo", "Don't empty");
+                }
+
+                if (!slider.Photo.IsImage())
+                {
+                    ModelState.AddModelError("Photo", "only image");
+                    return View();
+                }
+                if (slider.Photo.IsCorrectSize(500))
+                {
+                    ModelState.AddModelError("Photo", "500-den yuxari ola bilmez!");
+                    return View();
+                }
+
+                Slider dbSlider = await _context.Sliders.FindAsync(id);
+                string path = Path.Combine(_env.WebRootPath, "img", dbSlider.ImageUrl);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                string fileName = await slider.Photo.SaveImageAsync(_env.WebRootPath, "img");
+                dbSlider.ImageUrl = fileName;
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

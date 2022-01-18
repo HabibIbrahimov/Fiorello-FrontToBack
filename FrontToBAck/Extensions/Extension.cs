@@ -21,9 +21,11 @@ namespace FrontToBAck.Extensions
         {
             string fileName = Guid.NewGuid() + file.FileName;
             string path = Path.Combine(root, folder,fileName);
+            using (FileStream fileStream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
 
-            FileStream fileStream = new FileStream(path, FileMode.Create);
-            await file.CopyToAsync(fileStream);
             return fileName;
         }
     }
