@@ -37,7 +37,7 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category category)
         {
-            if (!ModelState.IsValid) return View();
+            
             bool isExist=_context.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower().Trim());
             if (isExist)
             {

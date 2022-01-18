@@ -17,7 +17,7 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
     {
         private readonly Context _context;
         private readonly IWebHostEnvironment _env;
-        public SliderController(Context context,IWebHostEnvironment env)
+        public SliderController(Context context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
@@ -31,76 +31,76 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Slider slider)
+        {
+            if (ModelState["Photo"].ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
+            {
+                ModelState.AddModelError("Photo", "Don't empty");
+            }
+
+            if (!slider.Photo.IsImage())
+            {
+                ModelState.AddModelError("Photo", "only image");
+                return View();
+            }
+            if (slider.Photo.IsCorrectSize(500))
+            {
+                ModelState.AddModelError("Photo", "500-den yuxari ola bilmez!");
+                return View();
+            }
+
+
+            Slider newSlider = new Slider();
+
+            string fileName = await slider.Photo.SaveImageAsync(_env.WebRootPath, "img");
+            newSlider.ImageUrl = fileName;
+
+
+            await _context.Sliders.AddAsync(newSlider);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction("Index");
+        }
+
+
         //[HttpPost]
         //[ValidateAntiForgeryToken]
+
         //public async Task<IActionResult> Create(Slider slider)
         //{
-        //    if (ModelState["Photo"].ValidationState==Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
+        //    if (ModelState["Photos"].ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
         //    {
-        //        ModelState.AddModelError("Photo", "Don't empty");
+        //        ModelState.AddModelError("Photos", "Don't empty");
         //    }
-
-        //    if (!slider.Photo.IsImage())
+        //    foreach (IFormFile photo in slider.Photos)
         //    {
-        //        ModelState.AddModelError("Photo", "only image");
-        //        return View();
+        //        if (!photo.IsImage())
+        //        {
+        //            ModelState.AddModelError("Photos", "only image");
+        //            return View();
+        //        }
+        //        if (photo.IsCorrectSize(500))
+        //        {
+        //            ModelState.AddModelError("Photos", "500-den yuxari ola bilmez!");
+        //            return View();
+        //        }
+
+
+        //        Slider newSlider = new Slider();
+
+        //        string fileName = await photo.SaveImageAsync(_env.WebRootPath, "img");
+        //        newSlider.ImageUrl = fileName;
+
+
+        //        await _context.Sliders.AddAsync(newSlider);
+        //        await _context.SaveChangesAsync();
         //    }
-        //    if (slider.Photo.IsCorrectSize(500))
-        //    {
-        //        ModelState.AddModelError("Photo", "500-den yuxari ola bilmez!");
-        //        return View();
-        //    }
-
-
-        //    Slider newSlider = new Slider();
-
-        //    string fileName=await slider.Photo.SaveImageAsync(_env.WebRootPath, "img");
-        //    newSlider.ImageUrl = fileName;
-
-
-        //   await _context.Sliders.AddAsync(newSlider);
-        //   await _context.SaveChangesAsync();
-
 
         //    return RedirectToAction("Index");
         //}
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult>Create(Slider slider)
-        {
-            if (ModelState["Photos"].ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
-            {
-                ModelState.AddModelError("Photos", "Don't empty");
-            }
-            foreach (IFormFile photo in slider.Photos)
-            {
-                if (!photo.IsImage())
-                {
-                    ModelState.AddModelError("Photos", "only image");
-                    return View();
-                }
-                if (photo.IsCorrectSize(500))
-                {
-                    ModelState.AddModelError("Photos", "500-den yuxari ola bilmez!");
-                    return View();
-                }
-
-
-                Slider newSlider = new Slider();
-
-                string fileName = await photo.SaveImageAsync(_env.WebRootPath, "img");
-                newSlider.ImageUrl = fileName;
-
-
-                await _context.Sliders.AddAsync(newSlider);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction("Index");
-    }
 
         public async Task<IActionResult> Remove(int? id)
         {
@@ -119,14 +119,14 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             Slider dbSlider = await _context.Sliders.FindAsync(id);
             if (dbSlider == null) return NotFound();
 
-            string path = Path.Combine(_env.WebRootPath,"img", dbSlider.ImageUrl);
+            string path = Path.Combine(_env.WebRootPath, "img", dbSlider.ImageUrl);
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);
             }
             _context.Sliders.Remove(dbSlider);
             await _context.SaveChangesAsync();
-           return  RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Update(int? id)
@@ -138,7 +138,7 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int?id,Slider slider)
+        public async Task<IActionResult> Update(int? id, Slider slider)
         {
             if (id == null) return NotFound();
             if (slider.Photo != null)
