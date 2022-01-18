@@ -15,6 +15,8 @@ namespace FrontToBAck.Models
         public string ImageUrl { get; set; }
         [NotMapped]
         [Required]
-        public IFormFile Photo { get; set; }
+        public IFormFile[] Photos { get; set; }
+
+       
     }
 }
