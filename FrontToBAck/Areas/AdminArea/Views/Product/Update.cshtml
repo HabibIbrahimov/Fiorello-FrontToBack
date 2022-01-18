@@ -1,0 +1,38 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <p class="card-description">
+                        Update Product Form
+                    </p>
+                    <form class="forms-sample" method="Post">
+                        <div class="form-group">
+                            <label asp-for="Name">Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price">Price</label>
+                            <textarea asp-for="Price" class="form-control" placeholder="Price"></textarea>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.ImageUrl">Photo</label>
+                            <input asp-for="@Model.ImageUrl" type="file" class="form-control" accept="image/*" placeholder="Image">
+                            <span class="text-danger" asp-validation-for="@Model.ImageUrl"></span>
+                        </div>
+                        <button class="btn btn-light">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

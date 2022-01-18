@@ -77,5 +77,29 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             if (dbProduct == null) return NotFound();
             return View(dbProduct);
         }
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null) return NotFound();
+            Product dbProduct = await _context.Products.FindAsync(id);
+            if (dbProduct == null) return NotFound();
+            return View(dbProduct);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Product product)
+        {
+            if (!ModelState.IsValid) return View();
+            bool isExist = _context.Products.Any(c => c.Name.ToLower() == product.Name.ToLower().Trim());
+            Product isExistProduct = _context.Products.FirstOrDefault(c => c.Id == product.Id);
+            if (isExist && !(isExistProduct.Name.ToLower() == product.Name.ToLower().Trim()))
+            {
+                ModelState.AddModelError("Name", "Bu adla product movcuddur!");
+                return View();
+            };
+            isExistProduct.Name = product.Name;
+            isExistProduct.Price = product.Price;
+            isExistProduct.ImageUrl = product.ImageUrl;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
