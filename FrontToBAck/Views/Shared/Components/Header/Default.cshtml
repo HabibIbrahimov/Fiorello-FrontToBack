@@ -143,43 +143,41 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color: #1b1b1b;">Elements</a>
-                                    <ul class="list-unstyled py-3 elements">
-                                        <li class=""><a class="px-1" href="">Classic</a></li>
-                                        <li class=""><a class="px-1" href="">Infographic</a></li>
-                                        <li class="element">
-                                            <a class="px-1" href="">Interactive</a>
-                                            <i class="fas fa-chevron-right fa-sm "></i>
-                                            <ul class="list-unstyled py-3">
-                                                <li class=""><a class="px-3" href="">Element 1</a></li>
-                                                <li class=""><a class="px-3" href="">Element 2</a></li>
-                                                <li class=""><a class="px-3" href="">Element 3</a></li>
-                                            </ul>
-                                        <li class=""><a class="px-1" href="">Typography</a></li>
+                                <li class="nav-item my-auto search">
+                                  @ViewBag.UserName
                                 </li>
-                            </ul>
-                            </li>
-                            <li class="nav-item my-auto search">
-                                <i class="fas fa-search" id="search"></i>
-                                <ul id="search-list" class="list-unstyled py-3">
-                                    <li class="d-flex px-3">
-                                        <input id="input-search" type="text" placeholder="Search">
-                                        <i class="fas fa-search my-auto" id="search"></i>
-                                    </li>
+                                <li class="nav-item">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a asp-controller="Account" asp-action="Logout" class="nav-link">Logout</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
 
-                                </ul>
-                            </li>
-                            <li class="nav-item my-auto shop-cart">
-                                <a asp-controller="basket" asp-action="ShowBasket"><i class="fas fa-shopping-bag"></i></a>
-                                <sup class="rounded-circle">@ViewBag.ProductCount</sup>
-                                <span>CART ($0)</span>
-                                <ul class="list-unstyled py-3">
-                                    <li class="">No products in the cart.</li>
-                                </ul>
-                            </li>
-                            </ul>
-                        </div>
+                                    }
+                                </li>
+
+
+                                <li class="nav-item my-auto search">
+                                    <i class="fas fa-search" id="search"></i>
+                                    <ul id="search-list" class="list-unstyled py-3">
+                                        <li class="d-flex px-3">
+                                            <input id="input-search" type="text" placeholder="Search">
+                                            <i class="fas fa-search my-auto" id="search"></i>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item my-auto shop-cart">
+                                    <a asp-controller="basket" asp-action="ShowBasket"><i class="fas fa-shopping-bag"></i></a>
+                                    <sup class="rounded-circle">@ViewBag.ProductCount</sup>
+                                    <span>CART ($0)</span>
+                                    <ul class="list-unstyled py-3">
+                                        <li class="">No products in the cart.</li>
+                                    </ul>
+                                </li>
+</div>
                     </nav>
                 </div>
             </div>

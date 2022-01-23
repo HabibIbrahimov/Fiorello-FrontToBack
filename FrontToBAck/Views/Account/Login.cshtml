@@ -1,4 +1,4 @@
-﻿@model RegisterVM
+﻿@model LoginVM
 @{
     Layout = null;
 }
@@ -33,45 +33,22 @@
                             <div class="brand-logo">
                                 <img src="~/img/logo.png" alt="logo">
                             </div>
-                            <div class="alert alert-danger" asp-validation-summary="ModelOnly" ></div>
+                            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
                             <form class="pt-3" method="post">
-                                <div class="form-group">
-                                    <input asp-for="FullName" class="form-control form-control-lg" placeholder="FullName"><br />
-                                    <span asp-validation-for="FullName" class="text text-danger"></span>
-                                </div>
-
                                 <div class="form-group">
                                     <input asp-for="UserName" class="form-control form-control-lg" placeholder="Username"><br />
                                     <span asp-validation-for="UserName" class="text text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input asp-for="Email" class="form-control form-control-lg" placeholder="Email"><br />
-                                    <span asp-validation-for="Email" class="text text-danger"></span>
-                                </div>
-
-                                <div class="form-group">
                                     <input asp-for="Password" class="form-control form-control-lg" placeholder="Password"><br />
                                     <span asp-validation-for="Password" class="text text-danger"></span>
                                 </div>
-                                <div class="form-group">
-                                    <input asp-for="ConfirmPassword" class="form-control form-control-lg" placeholder="ConfirmPassword"><br />
-                                    <span asp-validation-for="ConfirmPassword" class="text text-danger"></span>
-                                </div>
-                                @*<div class="mb-4">
-            <div class="form-check">
-                <label class="form-check-label text-muted">
-                    <input type="checkbox" class="form-check-input">
-                    I agree to all Terms & Conditions
-                </label>
-            </div>
-        </div>*@
-
-                                <div class="text-center mt-4 font-weight-light">
-                                    Already have an account? <a asp-controller="Account" asp-action="Login" class="text-primary">Login</a>
-                                </div><br />
                                 <button type="submit" class="btn btn-block  auth-form-btn btn-primary">
-                                   Register
+                                    Login
                                 </button>
+                                <div class="text-center mt-4 font-weight-light">
+                                    Don't have an account? <a asp-controller="Account" asp-action="Register"  class="text-primary">Create</a>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -93,3 +70,4 @@
 </body>
 
 </html>
+

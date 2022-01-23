@@ -1,6 +1,7 @@
 ﻿using FrontToBAck.DAL;
 using FrontToBAck.Models;
 using FrontToBAck.ViewsModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -13,12 +14,20 @@ namespace FrontToBAck.ViewComponents
     public class HeaderViewComponent:ViewComponent
     {
         private readonly Context _context;
-        public HeaderViewComponent(Context context)
+        private readonly UserManager<AppUser> _userManager;
+
+        public HeaderViewComponent(Context context,UserManager<AppUser>userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                ViewBag.UserName = user.FullName;
+            };
             ViewBag.ProductCount = 0;
             if (Request.Cookies["basket"]!=null)
             {

@@ -57,6 +57,7 @@ namespace FrontToBAck
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseRouting();
             app.UseSession();
             app.UseEndpoints(endpoints =>
