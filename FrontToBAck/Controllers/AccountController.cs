@@ -13,11 +13,15 @@ namespace FrontToBAck.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser>signInManager)
+        public AccountController(
+            UserManager<AppUser> userManager,SignInManager<AppUser>signInManager,
+            RoleManager<IdentityRole>roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         public IActionResult Register()
         {
@@ -46,7 +50,7 @@ namespace FrontToBAck.Controllers
                 }
                 return View();
             }
-
+            await _userManager.AddToRoleAsync(user, "Member");
            await _signInManager.SignInAsync(user, true);
 
             return RedirectToAction("Index", "Home");
@@ -76,18 +80,24 @@ namespace FrontToBAck.Controllers
             }
 
             var signInResult = await _signInManager.PasswordSignInAsync(dbUser, login.Password, true, true);
+            if (signInResult.IsLockedOut)
+            {
+                ModelState.AddModelError("", "is lockout");
+                return View();
+            }
             if (!signInResult.Succeeded)
             {
                 ModelState.AddModelError("", "UserName or Password invalid");
                 return View();
             }
 
-            if (signInResult.IsLockedOut)
+            var roles = await _userManager.GetRolesAsync(dbUser);
+            if (roles[0]=="Admin")
             {
-                ModelState.AddModelError("", "is lockout");
-                return View();
+                return RedirectToAction("Index", "Dashboard", new { area = "AdminArea" });
             }
-
+           
+           
             return RedirectToAction("Index", "Home");
         }
 
@@ -97,18 +107,20 @@ namespace FrontToBAck.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
-
-
-
-
-
-
-
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task CreateRole()
+        {
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
+            }
+            if (!await _roleManager.RoleExistsAsync("Member"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "Member" });
+            }
         }
     }
 }

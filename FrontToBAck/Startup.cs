@@ -60,6 +60,8 @@ namespace FrontToBAck
             app.UseAuthentication();
             app.UseRouting();
             app.UseSession();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapGet("/", async context =>
