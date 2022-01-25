@@ -1,4 +1,5 @@
 ﻿using FrontToBAck.Models;
+using FrontToBAck.ViewsModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace FrontToBAck.Areas.AdminArea.Controllers
 {
+    [Area("AdminArea")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -22,9 +24,34 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string name)
         {
-            return View();
+
+            var users = name == null ? _userManager.Users.ToList() :
+                _userManager.Users.Where(u => u.FullName.ToLower().Contains(name.ToLower())).ToList();
+            //List<UserReturnVM> userReturnVM = new List<UserReturnVM>();
+            //foreach (var user in users)
+            //{
+            //    UserReturnVM userReturn = new UserReturnVM();
+            //    userReturn.FullName = user.FullName;
+            //    userReturn.Email = user.Email;
+            //    userReturn.UserName = user.UserName;
+            //    userReturn.Role=(await _userManager.GetRolesAsync(user))[0]
+            //    userReturnVM.Add(userReturn);
+            //}
+            return View(users);
         }
+        
+        
+        public async Task<IActionResult> Detail(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            UserRoleVM userRoleVM = new UserRoleVM();
+            userRoleVM.AppUser = user;
+            userRoleVM.Roles = await _userManager.GetRolesAsync(user);
+            return View(userRoleVM);
+        }
+
+
     }
 }
