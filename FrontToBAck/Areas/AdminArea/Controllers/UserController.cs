@@ -52,6 +52,33 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             return View(userRoleVM);
         }
 
+        public async Task<IActionResult> Register(RegisterVM register)
+        {
+            if (!ModelState.IsValid) return View();
+
+            AppUser user = new AppUser
+            {
+                FullName = register.FullName,
+                UserName = register.UserName,
+                Email = register.Email
+
+            };
+            IdentityResult identityResult = await _userManager.CreateAsync(user, register.Password);
+
+            if (!identityResult.Succeeded)
+            {
+                foreach (var error in identityResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            };
+            await _userManager.AddToRoleAsync(user, "Member");
+            await _signInManager.SignInAsync(user, true);
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
     }
 }

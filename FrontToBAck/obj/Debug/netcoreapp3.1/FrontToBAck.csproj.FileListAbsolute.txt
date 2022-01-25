@@ -180,3 +180,4 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Account\R
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\User\Index.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\User\Detail.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\User\Register.cshtml.g.cs

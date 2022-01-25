@@ -49,9 +49,9 @@ namespace FrontToBAck.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
                 return View();
-            }
+            };
             await _userManager.AddToRoleAsync(user, "Member");
-           await _signInManager.SignInAsync(user, true);
+            await _signInManager.SignInAsync(user, true);
 
             return RedirectToAction("Index", "Home");
         }
