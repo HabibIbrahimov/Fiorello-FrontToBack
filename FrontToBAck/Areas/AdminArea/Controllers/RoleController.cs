@@ -1,5 +1,6 @@
 ﻿using FrontToBAck.DAL;
 using FrontToBAck.Models;
+using FrontToBAck.ViewsModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -54,19 +55,19 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             return NotFound();
         }
 
-        //public async Task<IActionResult> Update(string id)
-        //{
-        //    var user = await _userManager.FindByIdAsync(id);
-        //    UpdateRoleVM updateUserRole = new UpdateRoleVM
-        //    {
-        //        User = user,
-        //        Userid = user.Id,
-        //        Roles = _roleManager.Roles.ToList(),
-        //        UserRoles = await _userManager.GetRolesAsync(user)
+        public async Task<IActionResult> Update(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            UpdateRoleVM updateUserRole = new UpdateRoleVM
+            {
+                User = user,
+                Userid = user.Id,
+                Roles = _roleManager.Roles.ToList(),
+                UserRoles = await _userManager.GetRolesAsync(user)
 
-        //    };
-        //    return View(updateUserRole);
-        //}
+            };
+            return View(updateUserRole);
+        }
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Update(string id, List<string> roles)
