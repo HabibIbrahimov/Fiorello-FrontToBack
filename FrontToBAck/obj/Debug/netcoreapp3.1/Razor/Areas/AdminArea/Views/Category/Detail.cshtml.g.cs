@@ -26,8 +26,15 @@ using FrontToBAck.ViewsModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "B:\Asp.Net\FrontToBAck\FrontToBAck\Areas\AdminArea\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7c6ba46f77a968147a4379349dcfa196bb69178e", @"/Areas/AdminArea/Views/Category/Detail.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"318bc7fb4fb6d2edb0d503e7f2b266d47badf04d", @"/Areas/AdminArea/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"09989595813780c0e8c6d7e80b134ac78b363ee6", @"/Areas/AdminArea/Views/_ViewImports.cshtml")]
     public class Areas_AdminArea_Views_Category_Detail : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Category>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Category", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -82,7 +89,7 @@ using FrontToBAck.ViewsModels;
 #line hidden
 #nullable disable
             WriteLiteral("</p>\r\n        </div>\r\n        <div class=\"col-6\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c6ba46f77a968147a4379349dcfa196bb69178e4984", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c6ba46f77a968147a4379349dcfa196bb69178e5179", async() => {
                 WriteLiteral("Go Back");
             }
             );

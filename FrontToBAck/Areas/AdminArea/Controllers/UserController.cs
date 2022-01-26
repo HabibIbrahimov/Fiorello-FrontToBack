@@ -1,5 +1,7 @@
-﻿using FrontToBAck.Models;
+﻿using FrontToBAck.DAL;
+using FrontToBAck.Models;
 using FrontToBAck.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,11 +12,14 @@ using System.Threading.Tasks;
 namespace FrontToBAck.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly Context _context;
+
 
         public UserController(
             UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
@@ -28,7 +33,7 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
         {
 
             var users = name == null ? _userManager.Users.ToList() :
-                _userManager.Users.Where(u => u.FullName.ToLower().Contains(name.ToLower())).ToList();
+                 _userManager.Users.Where(u => u.FullName.ToLower().Contains(name.ToLower())).ToList();
             //List<UserReturnVM> userReturnVM = new List<UserReturnVM>();
             //foreach (var user in users)
             //{
@@ -79,6 +84,26 @@ namespace FrontToBAck.Areas.AdminArea.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> IsActive(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (user.IsActive)
+            {
+                user.IsActive = false;
+            }
+            else
+            {
+                user.IsActive = true;
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+        }
 
     }
 }

@@ -40,6 +40,7 @@ namespace FrontToBAck.Controllers
                 Email = register.Email
 
             };
+            user.IsActive = true;
             IdentityResult identityResult = await _userManager.CreateAsync(user, register.Password);
 
             if (!identityResult.Succeeded)
@@ -63,6 +64,10 @@ namespace FrontToBAck.Controllers
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -80,6 +85,11 @@ namespace FrontToBAck.Controllers
             }
 
             var signInResult = await _signInManager.PasswordSignInAsync(dbUser, login.Password, true, true);
+            if (!dbUser.IsActive)
+            {
+                ModelState.AddModelError("", "user is deactive");
+                return View();
+            }
             if (signInResult.IsLockedOut)
             {
                 ModelState.AddModelError("", "is lockout");

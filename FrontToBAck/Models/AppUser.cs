@@ -9,7 +9,8 @@ namespace FrontToBAck.Models
 {
     public class AppUser:IdentityUser
     {
-        [Required,StringLength(maximumLength:50)]
+        [Required, StringLength(maximumLength: 50)]
         public string FullName { get; set; }
+        public bool IsActive { get; set; }
     }
 }
