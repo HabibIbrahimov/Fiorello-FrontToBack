@@ -184,3 +184,7 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Role\Index.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Role\Create.cshtml.g.cs
 B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Areas\AdminArea\Views\Role\Update.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgetPassword.cshtml.g.cs
+B:\Asp.Net\FrontToBAck\FrontToBAck\bin\Debug\netcoreapp3.1\MailKit.dll
+B:\Asp.Net\FrontToBAck\FrontToBAck\bin\Debug\netcoreapp3.1\MimeKit.dll
+B:\Asp.Net\FrontToBAck\FrontToBAck\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
