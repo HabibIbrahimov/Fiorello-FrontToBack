@@ -188,3 +188,4 @@ B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Account\F
 B:\Asp.Net\FrontToBAck\FrontToBAck\bin\Debug\netcoreapp3.1\MailKit.dll
 B:\Asp.Net\FrontToBAck\FrontToBAck\bin\Debug\netcoreapp3.1\MimeKit.dll
 B:\Asp.Net\FrontToBAck\FrontToBAck\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+B:\Asp.Net\FrontToBAck\FrontToBAck\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs

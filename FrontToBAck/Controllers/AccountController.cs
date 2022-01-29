@@ -164,7 +164,21 @@ namespace FrontToBAck.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        public async Task<IActionResult> ResetPassword(ForgetPassword model)
+        public async Task<IActionResult> ResetPassword(string email,string token)
+        {
+            AppUser user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return NotFound();
+            ForgetPassword forgetPassword = new ForgetPassword
+            {
+                Token = token,
+                User = user
+            };
+            return View(forgetPassword);
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        [ActionName("ResetPassword")]
+        public async Task<IActionResult> Reset(ForgetPassword model)
         {
             AppUser user = await _userManager.FindByEmailAsync(model.User.Email);
             if (user == null) return NotFound();
@@ -173,11 +187,13 @@ namespace FrontToBAck.Controllers
                 Token = model.Token,
                 User = user
             };
-            return View(forgetPassword);
-        }
-        public async Task<IActionResult> ResetPassword()
-        {
-
+            if (!ModelState.IsValid) return View(forgetPassword);
+            IdentityResult result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            foreach (var item in result.Errors)
+            {
+                ModelState.AddModelError("", item.Description);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
