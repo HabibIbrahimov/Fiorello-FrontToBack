@@ -3,6 +3,15 @@
     ViewData["Title"] = "ShowBasket";
     double Total = 0;
 }
+<div class="container">
+    <div class="row">
+        @if (TempData["Fail"] != null)
+        {
+            <div id="successAlert" class="alert alert-success">@TempData["Fail"]</div>
+        }
+
+    </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -53,3 +62,13 @@
     </div>
 </div>
 
+@section Scripts{
+
+    <script>
+    let successAlert = document.getElementById("successAlert");
+    setTimeout(() => {
+        successAlert.remove();
+    },3000)
+    </script>
+
+}

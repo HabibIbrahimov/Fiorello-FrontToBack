@@ -85,13 +85,29 @@ namespace FrontToBAck.Controllers
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             Sales sales = new Sales();
             sales.AppUserId = user.Id;
+            sales.SaleDate = DateTime.Now;
 
             List<BasketProduct> basketProducts = JsonConvert.DeserializeObject<List<BasketProduct>>(Request.Cookies["basket"]);
             List<SalesProduct> salesProducts = new List<SalesProduct>();
+            List<Product> dbProducts = new List<Product>();
+            foreach (var item in basketProducts)
+            {
+                Product dbProduct = await _context.Products.FindAsync(item.Id);
+                if (dbProduct.Count < item.Count)
+                {
+                    TempData["Fail"] = $"{item.Name} bazada yoxdur";
+                    return RedirectToAction("ShowBasket", "Basket");
+                }
+                dbProducts.Add(dbProduct);
+
+
+            }
             double total = 0;
             foreach (var basketProduct in basketProducts)
             {
-                Product dbProduct = await _context.Products.FindAsync(basketProduct.Id);
+                Product dbProduct = dbProducts.Find(p => p.Id == basketProduct.Id);
+
+                await UpdateProductCount(dbProduct, basketProduct);
                 SalesProduct salesProduct = new SalesProduct();
                 salesProduct.SalesId = sales.Id;
                 salesProduct.ProductId = dbProduct.Id;
@@ -102,7 +118,14 @@ namespace FrontToBAck.Controllers
             sales.Total = total;
             await _context.Sales.AddAsync(sales);
             await _context.SaveChangesAsync();
+            TempData["Success"] = "Sales Done";
             return RedirectToAction("Index", "Home");
+        }
+
+        private async Task UpdateProductCount(Product product, BasketProduct basketProduct)
+        {
+            product.Count = product.Count - basketProduct.Count;
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -4,6 +4,17 @@
 }
 
 <!-- SLIDER START -->
+
+<div class="container">
+    <div class="row">
+        @if (TempData["Success"] != null)
+        {
+            <div id="successAlert" class="alert alert-success">@TempData["Success"]</div>
+        }
+
+    </div>
+</div>
+
 <section id="slider">
     <div class="container-fluid">
         <div class="row">
@@ -26,7 +37,7 @@
 <!-- SLIDER END -->
 <!-- PRODUCTS_F START -->
 
-<input id="count" type="hidden"  value="@ViewBag.ProductCount"/>
+<input id="count" type="hidden" value="@ViewBag.ProductCount" />
 <section id="products_main">
     <div class="container">
         <div class="row pt-5">
@@ -63,7 +74,7 @@
             </div>
         </div>
         <div class="row" id="productrow">
-           @await Component.InvokeAsync("Products")
+            @await Component.InvokeAsync("Products")
 
         </div>
 
@@ -240,3 +251,13 @@
 </section>
 <!-- SLIDER_2 END -->
 
+@section Scripts{
+
+    <script>
+    let successAlert = document.getElementById("successAlert");
+    setTimeout(() => {
+        successAlert.remove();
+    },3000)
+    </script>
+
+}
