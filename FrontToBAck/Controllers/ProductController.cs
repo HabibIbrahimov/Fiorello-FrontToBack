@@ -50,19 +50,19 @@ namespace FrontToBAck.Controllers
             return View(product);
                 
         }
-        //public IActionResult LoadMore()
-        //{
+        public IActionResult LoadMore()
+        {
 
-        //    //return Json(_context.Products.Select(p => new ProductReturn
-        //    //{
-        //    //    Id = p.Id,
-        //    //    Name = p.Name,
-        //    //    Price = p.Price,
-        //    //    ImageUrl = p.ImageUrl,
-        //    //    Category = p.Category.Name
+            return Json(_context.Products.Select(p => new ProductReturn
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                ImageUrl = p.ImageUrl,
+                Category = p.Category.Name
 
-        //    //}).Take(8).ToList());
+            }).Take(8).ToList());
 
-        //}
+        }
     }
 }

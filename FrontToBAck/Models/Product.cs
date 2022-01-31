@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FrontToBack.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,7 @@ namespace FrontToBAck.Models
         public double Price { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-       
+        public List<SalesProduct> SalesProducts { get; set; }
+
     }
 }

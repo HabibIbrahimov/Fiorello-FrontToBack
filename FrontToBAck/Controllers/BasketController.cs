@@ -1,6 +1,8 @@
-﻿using FrontToBAck.DAL;
+﻿using FrontToBack.Models;
+using FrontToBAck.DAL;
 using FrontToBAck.Models;
 using FrontToBAck.ViewsModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -13,9 +15,11 @@ namespace FrontToBAck.Controllers
     public class BasketController : Controller
     {
         private readonly Context _context;
-        public BasketController(Context context)
+        private readonly UserManager<AppUser> _userManager;
+        public BasketController(Context context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -72,6 +76,33 @@ namespace FrontToBAck.Controllers
                 Response.Cookies.Append("basket", JsonConvert.SerializeObject(products), new Microsoft.AspNetCore.Http.CookieOptions { MaxAge = TimeSpan.FromMinutes(14) });
             }
             return View(products);
+        }
+
+        public async Task<IActionResult> Sale()
+        {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
+
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Sales sales = new Sales();
+            sales.AppUserId = user.Id;
+
+            List<BasketProduct> basketProducts = JsonConvert.DeserializeObject<List<BasketProduct>>(Request.Cookies["basket"]);
+            List<SalesProduct> salesProducts = new List<SalesProduct>();
+            double total = 0;
+            foreach (var basketProduct in basketProducts)
+            {
+                Product dbProduct = await _context.Products.FindAsync(basketProduct.Id);
+                SalesProduct salesProduct = new SalesProduct();
+                salesProduct.SalesId = sales.Id;
+                salesProduct.ProductId = dbProduct.Id;
+                salesProducts.Add(salesProduct);
+                total += basketProduct.Count * dbProduct.Price;
+            }
+            sales.SalesProducts = salesProducts;
+            sales.Total = total;
+            await _context.Sales.AddAsync(sales);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

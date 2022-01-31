@@ -1,4 +1,5 @@
-﻿using FrontToBAck.Models;
+﻿using FrontToBack.Models;
+using FrontToBAck.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,7 +25,9 @@ namespace FrontToBAck.DAL
         public DbSet<Blog> Blog { get; set; }
         public DbSet<BlogSlider> BlogSliders { get; set; }
         public DbSet<Bio> Bios { get; set; }
-       
+        public DbSet<Sales> Sales { get; set; }
+        public DbSet<SalesProduct> SalesProducts { get; set; }
+
 
     }
 }
