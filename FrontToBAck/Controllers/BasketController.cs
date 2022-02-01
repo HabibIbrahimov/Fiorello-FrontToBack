@@ -93,11 +93,11 @@ namespace FrontToBAck.Controllers
             foreach (var item in basketProducts)
             {
                 Product dbProduct = await _context.Products.FindAsync(item.Id);
-                if (dbProduct.Count < item.Count)
-                {
-                    TempData["Fail"] = $"{item.Name} bazada yoxdur";
-                    return RedirectToAction("ShowBasket", "Basket");
-                }
+                //if (dbProduct.Count < item.Count)
+                //{
+                //    TempData["Fail"] = $"{item.Name} bazada yoxdur";
+                //    return RedirectToAction("ShowBasket", "Basket");
+                //}
                 dbProducts.Add(dbProduct);
 
 
@@ -124,7 +124,7 @@ namespace FrontToBAck.Controllers
 
         private async Task UpdateProductCount(Product product, BasketProduct basketProduct)
         {
-            product.Count = product.Count - basketProduct.Count;
+            //product.Count = product.Count - basketProduct.Count;
             await _context.SaveChangesAsync();
         }
     }

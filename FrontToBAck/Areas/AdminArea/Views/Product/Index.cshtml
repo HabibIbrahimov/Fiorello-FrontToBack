@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+
 
 <div class="col-lg-6 grid-margin stretch-card">
     <div class="card">
@@ -11,7 +13,7 @@
                 <a class="btn btn-primary" asp-controller="Product" asp-action="Create">Create Product</a>
             </p>
             <div class="table-responsive">
-                <table class="table">
+                <table id="Pro" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -23,20 +25,20 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                <img style="width:100px; height:100px" src="~/img/@item.ImageUrl" />
-                            </td>
-                            <td>@item.Name</td>
-                            <td>@item.Price</td>
-                            <td>
-                                <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning"><i class="mdi mdi-table-edit"></i></a>
-                                <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-info"><i class="mdi mdi-account-card-details"></i></a>
-                                <a asp-controller="Product" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger"><i class="mdi mdi-account-remove"></i></a>
+                            <tr>
+                                <td>
+                                    <img style="width:100px; height:100px" src="~/img/@item.ImageUrl" />
+                                </td>
+                                <td>@item.Name</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning"><i class="mdi mdi-table-edit"></i></a>
+                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-info"><i class="mdi mdi-account-card-details"></i></a>
+                                    <a asp-controller="Product" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger"><i class="mdi mdi-account-remove"></i></a>
 
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
                         }
                     </tbody>
                 </table>
